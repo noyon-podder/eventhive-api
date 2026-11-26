@@ -1,12 +1,12 @@
-import express from "express";
-import config from "./config";
-const app = express();
-const port = config.port;
+import app from "./app";
+import config from "./config/index";
+import initDB from "./db";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const main = async () => {
+  app.listen(config.port, () => {
+    initDB();
+    console.log(`Example app listening on port ${config.port}`);
+  });
+};
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+main();
